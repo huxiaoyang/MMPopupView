@@ -40,6 +40,8 @@ typedef void(^MMPopupInputHandler)(NSString *text);
 @property (nonatomic, assign) CGFloat width;                // Default is 275.
 @property (nonatomic, assign) CGFloat buttonHeight;         // Default is 50.
 @property (nonatomic, assign) CGFloat innerMargin;          // Default is 25.
+@property (nonatomic, assign) CGFloat toperMargin;          // Default is 10.
+
 @property (nonatomic, assign) CGFloat cornerRadius;         // Default is 5.
 
 @property (nonatomic, assign) CGFloat titleFontSize;        // Default is 18.

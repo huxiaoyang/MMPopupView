@@ -116,7 +116,7 @@
             self.detailLabel = [UILabel new];
             [self addSubview:self.detailLabel];
             [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(lastAttribute).offset(5);
+                make.top.equalTo(lastAttribute).offset(config.toperMargin);
                 make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, config.innerMargin, 0, config.innerMargin));
             }];
             self.detailLabel.textColor = config.detailColor;
@@ -134,7 +134,7 @@
             self.inputView = [UITextField new];
             [self addSubview:self.inputView];
             [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(lastAttribute).offset(10);
+                make.top.equalTo(lastAttribute).offset(config.toperMargin);
                 make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, config.innerMargin, 0, config.innerMargin));
                 make.height.mas_equalTo(40);
             }];
@@ -345,6 +345,7 @@
         self.width          = 275.0f;
         self.buttonHeight   = 50.0f;
         self.innerMargin    = 25.0f;
+        self.toperMargin    = 10.0f;
         self.cornerRadius   = 5.0f;
 
         self.titleFontSize  = 18.0f;
