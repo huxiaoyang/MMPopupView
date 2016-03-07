@@ -16,6 +16,7 @@ typedef void(^MMPopupItemHandler)(NSInteger index);
 @property (nonatomic, assign) BOOL     highlight;
 @property (nonatomic, assign) BOOL     disabled;
 
+@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) UIColor  *color;
 
@@ -34,6 +35,36 @@ NS_INLINE MMPopupItem* MMItemMake(NSString* title, MMItemType type, MMPopupItemH
     MMPopupItem *item = [MMPopupItem new];
     
     item.title = title;
+    item.handler = handler;
+    
+    switch (type)
+    {
+        case MMItemTypeNormal:
+        {
+            break;
+        }
+        case MMItemTypeHighlight:
+        {
+            item.highlight = YES;
+            break;
+        }
+        case MMItemTypeDisabled:
+        {
+            item.disabled = YES;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return item;
+}
+
+NS_INLINE MMPopupItem* MMItemMakeImage(UIImage* image, MMItemType type, MMPopupItemHandler handler)
+{
+    MMPopupItem *item = [MMPopupItem new];
+    
+    item.image = image;
     item.handler = handler;
     
     switch (type)

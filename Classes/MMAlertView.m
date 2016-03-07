@@ -124,7 +124,8 @@
             self.detailLabel.font = [UIFont systemFontOfSize:config.detailFontSize];
             self.detailLabel.numberOfLines = 0;
             self.detailLabel.backgroundColor = self.backgroundColor;
-            self.detailLabel.text = detail;
+//            self.detailLabel.text = detail;
+            self.detailLabel.attributedText = [self buildAttributedString:detail];
             
             lastAttribute = self.detailLabel.mas_bottom;
         }
@@ -205,11 +206,21 @@
             }];
             [btn setBackgroundImage:[UIImage mm_imageWithColor:self.backgroundColor] forState:UIControlStateNormal];
             [btn setBackgroundImage:[UIImage mm_imageWithColor:config.itemPressedColor] forState:UIControlStateHighlighted];
-            [btn setTitle:item.title forState:UIControlStateNormal];
-            [btn setTitleColor:item.highlight?config.itemHighlightColor:config.itemNormalColor forState:UIControlStateNormal];
             btn.layer.borderWidth = MM_SPLIT_WIDTH;
             btn.layer.borderColor = config.splitColor.CGColor;
-            btn.titleLabel.font = (item==items.lastObject)?[UIFont boldSystemFontOfSize:config.buttonFontSize]:[UIFont systemFontOfSize:config.buttonFontSize];
+            
+            if (item.image) {
+                
+                [btn setImage:item.image forState:UIControlStateNormal];
+                
+            } else {
+                
+                [btn setTitle:item.title forState:UIControlStateNormal];
+                [btn setTitleColor:item.highlight?config.itemHighlightColor:config.itemNormalColor forState:UIControlStateNormal];
+                btn.titleLabel.font = (item==items.lastObject)?[UIFont boldSystemFontOfSize:config.buttonFontSize]:[UIFont systemFontOfSize:config.buttonFontSize];
+                
+            }
+            
         }
         [lastButton mas_updateConstraints:^(MASConstraintMaker *make) {
             
@@ -313,6 +324,16 @@
     [self.inputView resignFirstResponder];
 }
 
+- (NSMutableAttributedString *)buildAttributedString:(NSString *)text {
+    NSMutableParagraphStyle *_mps = [[NSMutableParagraphStyle alloc] init];
+    _mps.lineSpacing = [MMAlertViewConfig globalConfig].lineSpacing;
+    _mps.lineBreakMode = NSLineBreakByWordWrapping;
+    NSDictionary *_contentMap = [NSDictionary dictionaryWithObjectsAndKeys:_mps, NSParagraphStyleAttributeName, nil];
+    NSMutableAttributedString *_mas = [[NSMutableAttributedString alloc] initWithString:text attributes:_contentMap];
+    return _mas;
+}
+
+
 @end
 
 
@@ -346,6 +367,7 @@
         self.buttonHeight   = 50.0f;
         self.innerMargin    = 25.0f;
         self.toperMargin    = 10.0f;
+        self.lineSpacing    = 6.0f;
         self.cornerRadius   = 5.0f;
 
         self.titleFontSize  = 18.0f;

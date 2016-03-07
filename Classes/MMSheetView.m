@@ -108,12 +108,22 @@
             [btn setBackgroundImage:[UIImage mm_imageWithColor:config.backgroundColor] forState:UIControlStateNormal];
             [btn setBackgroundImage:[UIImage mm_imageWithColor:config.backgroundColor] forState:UIControlStateDisabled];
             [btn setBackgroundImage:[UIImage mm_imageWithColor:config.itemPressedColor] forState:UIControlStateHighlighted];
-            [btn setTitle:item.title forState:UIControlStateNormal];
-            [btn setTitleColor:item.highlight?config.itemHighlightColor:item.disabled?config.itemDisableColor:config.itemNormalColor forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:config.buttonFontSize];
             btn.layer.borderWidth = MM_SPLIT_WIDTH;
             btn.layer.borderColor = config.splitColor.CGColor;
             btn.enabled = !item.disabled;
+            
+            if (item.image) {
+                
+                [btn setImage:item.image forState:UIControlStateNormal];
+                
+            } else {
+                
+                [btn setTitle:item.title forState:UIControlStateNormal];
+                [btn setTitleColor:item.highlight?config.itemHighlightColor:item.disabled?config.itemDisableColor:config.itemNormalColor forState:UIControlStateNormal];
+                btn.titleLabel.font = [UIFont systemFontOfSize:config.buttonFontSize];
+                
+            }
+            
         }
         [lastButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.buttonView.mas_bottom).offset(MM_SPLIT_WIDTH);
