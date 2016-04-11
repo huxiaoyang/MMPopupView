@@ -333,6 +333,7 @@
     NSMutableParagraphStyle *_mps = [[NSMutableParagraphStyle alloc] init];
     _mps.lineSpacing = [MMAlertViewConfig globalConfig].lineSpacing;
     _mps.lineBreakMode = NSLineBreakByWordWrapping;
+    _mps.alignment = NSTextAlignmentCenter;
     NSDictionary *_contentMap = [NSDictionary dictionaryWithObjectsAndKeys:_mps, NSParagraphStyleAttributeName, nil];
     NSMutableAttributedString *_mas = [[NSMutableAttributedString alloc] initWithString:text attributes:_contentMap];
     return _mas;
