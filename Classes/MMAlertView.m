@@ -210,8 +210,13 @@
             btn.layer.borderColor = config.splitColor.CGColor;
             
             if (item.image) {
-                
-                [btn setImage:item.image forState:UIControlStateNormal];
+                if (item.highlight && item.imageHighlight) {
+                    [btn setBackgroundImage:[UIImage mm_imageWithColor:self.backgroundColor] forState:UIControlStateHighlighted];
+                    [btn setImage:item.image forState:UIControlStateNormal];
+                    [btn setImage:item.imageHighlight forState:UIControlStateHighlighted];
+                } else {
+                    [btn setImage:item.image forState:UIControlStateNormal];
+                }
                 
             } else {
                 

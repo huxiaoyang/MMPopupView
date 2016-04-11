@@ -67,7 +67,7 @@ UITableViewDataSource
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    cell.textLabel.text = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView"][indexPath.row];
+    cell.textLabel.text = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView", @"Alert - image"][indexPath.row];
     
     return cell;
 }
@@ -82,7 +82,7 @@ UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -158,6 +158,17 @@ UITableViewDataSource
                 [MMDateView hideAll];
             });
             
+            break;
+        }
+        case 6:
+        {
+            NSArray *items =
+            @[MMItemMakeImage(@"test", MMItemTypeHighlight, block),
+              MMItemMakeImage(@"test", MMItemTypeNormal, block)];
+            MMAlertView *alertView = [[MMAlertView alloc] initWithTitle:@"AlertView"
+                                                                 detail:@"each button take one row if there are more than 2 items"
+                                                                  items:items];
+            [alertView show];
             break;
         }
             

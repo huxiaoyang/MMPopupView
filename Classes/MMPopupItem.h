@@ -17,6 +17,7 @@ typedef void(^MMPopupItemHandler)(NSInteger index);
 @property (nonatomic, assign) BOOL     disabled;
 
 @property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) UIImage *imageHighlight;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) UIColor  *color;
 
@@ -60,11 +61,12 @@ NS_INLINE MMPopupItem* MMItemMake(NSString* title, MMItemType type, MMPopupItemH
     return item;
 }
 
-NS_INLINE MMPopupItem* MMItemMakeImage(UIImage* image, MMItemType type, MMPopupItemHandler handler)
+NS_INLINE MMPopupItem* MMItemMakeImage(NSString* imageName, MMItemType type, MMPopupItemHandler handler)
 {
     MMPopupItem *item = [MMPopupItem new];
     
-    item.image = image;
+    item.image = [UIImage imageNamed:imageName];
+    item.imageHighlight = [UIImage imageNamed:[NSString stringWithFormat:@"%@_highlight", imageName]];
     item.handler = handler;
     
     switch (type)
