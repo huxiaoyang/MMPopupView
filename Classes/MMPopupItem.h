@@ -18,6 +18,7 @@ typedef void(^MMPopupItemHandler)(NSInteger index);
 
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) UIImage *imageHighlight;
+
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) UIColor  *color;
 
